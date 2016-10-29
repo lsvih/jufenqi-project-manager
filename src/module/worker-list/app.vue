@@ -18,10 +18,6 @@
     </cell>
   </group>
 </div>
-<j-select :show="isShow" :num="selectType==0?address.length:sortTypeList.length">
-  <j-select-item v-show="selectType == 0" v-for="add in address">{{add}}</j-select-item>
-  <j-select-item v-show="selectType == 1" v-for="sortType in sortTypeList" v-tap="sortBy(sortType)">{{sortType}}</j-select-item>
-</j-select>
 <loading :show="loading" text="正在加载..."></loading>
 </template>
 
@@ -29,8 +25,6 @@
 import Lib from 'assets/Lib.js'
 import Group from 'vux-components/group'
 import Cell from 'vux-components/cell'
-import JSelect from 'components/JSelect.vue'
-import JSelectItem from 'components/JSelectItem.vue'
 import Loading from 'vux-components/loading'
 export default {
   data() {
@@ -51,8 +45,6 @@ export default {
   components: {
     Group,
     Cell,
-    JSelect,
-    JSelectItem,
     Loading
   },
   methods: {
