@@ -42,7 +42,7 @@ export default {
           return false;
         })
       } else {
-        location.href = `https://qy.weixin.qq.com/cgi-bin/loginpage?corp_id=${this.appId}&redirect_uri=${location.href}&state=STATE&usertype=member`
+        location.href = `https://qy.weixin.qq.com/cgi-bin/loginpage?corp_id=${this.appId}&redirect_uri=${encodeURIComponent(location.href)}&usertype=member`
       }
     }
   }
