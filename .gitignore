@@ -4,7 +4,9 @@ ehthumbs.db
 .gitattributes
 .project
 node_modules/
-dist/
+dist/module/
+dist/static/
+dist/css/
 npm-debug.log
 nohup.out
 
