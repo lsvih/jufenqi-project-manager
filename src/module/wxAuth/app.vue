@@ -1,0 +1,50 @@
+<template>
+
+</template>
+
+<script>
+import Lib from 'assets/Lib.js'
+export default {
+  data() {
+    return {
+      lastUrl: Lib.M.GetRequest().url?unescape(Lib.M.GetRequest().url):'./index.html',
+      code: Lib.M.GetRequest().auth_code,
+      appId: "wx532853a12ecebf6b"
+    }
+  },
+  ready() {
+    if (Lib.M.isAuth()) {
+      location.href = this.lastUrl
+    } else {
+      this.getCode()
+    }
+  },
+  methods: {
+    getCode() {
+      if (this.code) {
+        this.$http.post(`${Lib.C.userApi}auth/loginUsingWechatQy`, {
+          code: this.code
+        }, {
+          xhr: {
+            withCredentials: true
+          },
+          emulateJSON: true
+        }).then((res) => {
+          window.localStorage.setItem("user",JSON.stringify(res.data.data))
+          if(res.data.data.profile.mobile){
+            location.href = this.lastUrl
+          }else{
+            location.href = `./verifyPhone.html?url=${encodeURIComponent(this.lastUrl)}`
+          }
+        }, (res) => {
+          alert("微信登录失败，请稍后重试")
+          console.log(res)
+          return false;
+        })
+      } else {
+        location.href = `https://qy.weixin.qq.com/cgi-bin/loginpage?corp_id=${this.appId}&redirect_uri=${location.href}&state=STATE&usertype=member`
+      }
+    }
+  }
+}
+</script>
