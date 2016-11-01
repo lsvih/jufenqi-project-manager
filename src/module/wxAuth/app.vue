@@ -42,9 +42,8 @@ export default {
           return false;
         })
       } else {
-        let a = `https://qy.weixin.qq.com/cgi-bin/loginpage?corp_id=${this.appId}&redirect_uri=${encodeURIComponent(location.href)}&usertype=member`
-        console.log(a)
-        // location.href = 
+        let a = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${this.appId}&redirect_uri=${location.href}&response_type=code&scope=SCOPE&state=STATE#wechat_redirect`
+        location.href = a
       }
     }
   }
