@@ -8,7 +8,7 @@ export default {
   data() {
     return {
       lastUrl: Lib.M.GetRequest().url?unescape(Lib.M.GetRequest().url):'./index.html',
-      code: Lib.M.GetRequest().auth_code,
+      code: Lib.M.GetRequest().code,
       appId: "wx532853a12ecebf6b"
     }
   },
