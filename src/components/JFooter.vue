@@ -9,28 +9,21 @@
 
 <script>
 import Lib from 'assets/Lib.js'
-import indexIcon from 'assets/img/index-icon.png'
-import indexIconAct from 'assets/img/index-icon-active.png'
-import insIcon from 'assets/img/ins-icon.png'
-import insIconAct from 'assets/img/ins-icon-active.png'
-import userIcon from 'assets/img/user-icon.png'
-import userIconAct from 'assets/img/user-icon-active.png'
+import indexIcon from 'assets/img/com.png'
+import indexIconAct from 'assets/img/com-act.png'
+import userIcon from 'assets/img/user.png'
+import userIconAct from 'assets/img/user-act.png'
 export default {
   data() {
     return {
       moduleClass: [{
-        name: '首页',
+        name: '施工中',
         ename: 'index',
         icon: indexIcon,
         actIcon: indexIconAct
       }, {
-        name: '分期',
-        ename: 'instalment',
-        icon: insIcon,
-        actIcon: insIconAct
-      }, {
-        name: '个人',
-        ename: 'usercenter',
+        name: '我的',
+        ename: 'my',
         icon: userIcon,
         actIcon: userIconAct
       }]
@@ -62,7 +55,7 @@ footer {
     div {
       position: relative;
         display: inline-block;
-        width: 33%;
+        width: 50%;
         height: 100%;
         img {
           position: absolute;
