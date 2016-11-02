@@ -45,34 +45,6 @@ export default {
     data() {
         return {
             index: 0,
-            zcStatusList: [{
-                status: 0,
-                name: "订单已删除"
-            }, {
-                status: 1,
-                name: "已预约"
-            }, {
-                status: 2,
-                name: "待确认"
-            }, {
-                status: 3,
-                name: "待付款"
-            }, {
-                status: 4,
-                name: "待收货"
-            }, {
-                status: 5,
-                name: "已收货"
-            }, {
-                status: 6,
-                name: "退款中"
-            }, {
-                status: 7,
-                name: "已退款"
-            }, {
-                status: 8,
-                name: "已取消"
-            }],
             zxStatusList: [{
                 status: 0,
                 name: "订单已删除"
@@ -114,37 +86,13 @@ export default {
         this.index = (Lib.M.GetRequest().type - 1) || 0
         this.$http.get(`${Lib.C.orderApi}decorationOrders`, {
             params: {
-                filter: `customerId:${JSON.parse(window.localStorage.getItem('user')).userId}|status:[1,7]`
+                filter: `projectManagerId:${JSON.parse(window.localStorage.getItem('user')).userId}|status:[1,7]`
             }
         }).then((res) => {
             res.data.data.map((e) => {
                 this.zxList.push(e)
             })
             this.$refs.zx.reset()
-        }, (res) => {
-            alert("获取订单失败，请稍候再试QAQ")
-        })
-        this.$http.get(`${Lib.C.mOrderApi}materialSubOrders`, {
-            params: {
-                filter: `customerId:${JSON.parse(window.localStorage.getItem('user')).userId}|status:[6,7]`
-            }
-        }).then((res) => {
-            res.data.data.map((e) => {
-                this.tkList.push(e)
-            })
-            this.$refs.tk.reset()
-        }, (res) => {
-            alert("获取订单失败，请稍候再试QAQ")
-        })
-        this.$http.get(`${Lib.C.mOrderApi}materialOrders`, {
-            params: {
-                filter: `customerId:${JSON.parse(window.localStorage.getItem('user')).userId}|status:[1,5]`
-            }
-        }).then((res) => {
-            res.data.data.map((e) => {
-                this.zcList.push(e)
-            })
-            this.$refs.zc.reset()
         }, (res) => {
             alert("获取订单失败，请稍候再试QAQ")
         })
