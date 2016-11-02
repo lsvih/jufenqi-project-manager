@@ -92,34 +92,13 @@ export default {
             res.data.data.map((e) => {
                 this.zxList.push(e)
             })
-            this.$refs.zx.reset()
         }, (res) => {
             alert("获取订单失败，请稍候再试QAQ")
         })
     },
     methods: {
-        getTabType(index) {
-            console.log(index)
-            switch (index) {
-                case 0:
-                    return '装修订单'
-                    break
-                case 1:
-                    return '主材订单'
-                    break
-                case 2:
-                    return '软装订单'
-                    break
-                default:
-                    return '装修订单'
-                    break
-            }
-        },
-        getScreenHeight() {
-            return document.body.clientHeight
-        },
         getTime(timeStamp) {
-            var d = new Date(timeStamp);
+            var d = new Date(timeStamp*1000);
             var Y = d.getFullYear() + '-';
             var M = (d.getMonth() + 1 < 10 ? '0' + (d.getMonth() + 1) : d.getMonth() + 1) + '-';
             var D = (d.getDate() < 10 ? '0' + (d.getDate()) : d.getDate());
