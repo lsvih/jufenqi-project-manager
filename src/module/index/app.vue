@@ -1,35 +1,10 @@
 <template>
 <div class="content">
-    <div class="order" v-for="order in zxList">
-        <div class="zc-line-1">
-            <div class="zc-user-name">{{order.customerName}}</div>
-            <div class="zc-user-address">{{order.orderLocation+order.orderAddress}}</div>
-            <div class="zc-user-more" v-tap="viewDetail('zx',order.orderNo)">查看详情</div>
-        </div>
-        <div class="zc-line-2">
-            <div class="zc-order-date"><img src="./time.png">{{getTime(order.orderTime)}}</div>
-            <div class="zc-order-status">{{zxStatusList[order.status].name}}</div>
-        </div>
-        <div class="zc-line-3">
-            <div class="zc-butler-img"><img :src="order.manager.profileImage"></div>
-            <div class="zc-butler-name">{{order.manager.nickname}}</div>
-            <div class="zc-butler-tel" onclick="location.href='tel:{{order.manager.mobile}}'"><img src="tel.png"></div>
-        </div>
-        <div class="zc-line-3">
-            <div class="zc-butler-img"><img :src="order.planList[0].foreman.profileImage"></div>
-            <div class="zc-butler-name">{{order.planList[0].foreman.nickname}}</div>
-            <div class="zc-butler-tel" onclick="location.href='tel:{{order.planList[0].foreman.mobile}}'"><img src="tel.png"></div>
-        </div>
-        <div class="zc-line-3" v-if="order.planList.length===2">
-            <div class="zc-butler-img"><img :src="order.planList[1].foreman.profileImage"></div>
-            <div class="zc-butler-name">{{order.planList[1].foreman.nickname}}</div>
-            <div class="zc-butler-tel" onclick="location.href='tel:{{order.planList[1].foreman.mobile}}'"><img src="tel.png"></div>
-        </div>
-        <div class="zc-line-3">
-            <div class="zc-butler-img"><img :src="order.projectManager.profileImage"></div>
-            <div class="zc-butler-name">{{order.projectManager.nickname}}</div>
-            <div class="zc-butler-tel" onclick="location.href='tel:{{order.projectManager.mobile}}'"><img src="tel.png"></div>
-        </div>
+    <div class="order" v-for="order in zxList" v-tap="viewDetail('zx',order.orderNo)">
+        <img :src="order.customerImage">
+        <div class="tel" onclick="location.href='tel:{{order.customerMobile}}'">{{order.customerMobile}}</div>
+        <div class="name">{{order.customerName}}</div>
+        <div class="status">{{zxStatusList[order.status].name}}</div>
     </div>
 </div>
 <div v-if="zxList.length==0">
@@ -98,7 +73,7 @@ export default {
     },
     methods: {
         getTime(timeStamp) {
-            var d = new Date(timeStamp*1000);
+            var d = new Date(timeStamp * 1000);
             var Y = d.getFullYear() + '-';
             var M = (d.getMonth() + 1 < 10 ? '0' + (d.getMonth() + 1) : d.getMonth() + 1) + '-';
             var D = (d.getDate() < 10 ? '0' + (d.getDate()) : d.getDate());
@@ -138,123 +113,40 @@ header {
     border-color: #88C929 !important;
 }
 .order {
-    width: 100%;
-    height: auto;
+    width: calc(~"100% - 15px");
+    height: 80px;
     background-color: #fff;
-    margin-bottom: 10px;
-    .zc-line-1 {
-        height: 50px;
-        width: 100%;
-        border-bottom: 1px solid #eee;
-        position: relative;
-        .zc-user-name {
-            position: absolute;
-            top: 6px;
-            left: 15px;
-            font-size: 16px;
-            color: #393939;
-        }
-        .zc-user-address {
-            position: absolute;
-            bottom: 6px;
-            left: 15px;
-            font-size: 12px;
-            color: #393939;
-        }
-        .zc-user-more {
-            position: absolute;
-            top: 19px;
-            right: 15px;
-            font-size: 12px;
-            color: #3ba794;
-        }
+    padding-left: 15px;
+    position: relative;
+    border-bottom: 1px solid #eee;
+    img {
+        position: absolute;
+        top: 10px;
+        left: 15px;
+        width: 60px;
+        height: 60px;
     }
-    .zc-line-2 {
-        height: 40px;
-        width: 100%;
-        border-bottom: 1px solid #eee;
-        position: relative;
-        .zc-order-date {
-            position: absolute;
-            top: 14px;
-            left: 15px;
-            font-size: 12px;
-            color: #393939;
-            img {
-                vertical-align: middle;
-                height: 12px;
-                width: 12px;
-                margin-right: 5px;
-            }
-        }
-        .zc-order-shop {
-            position: absolute;
-            top: 0;
-            left: 15px;
-            height: 40px;
-            line-height: 40px;
-            font-size: 14px;
-            color: #393939;
-        }
-        .zc-order-status {
-            position: absolute;
-            right: 15px;
-            top: 15px;
-            font-size: 12px;
-            color: #393939;
-        }
+    .status {
+        position: absolute;
+        font-size: 12px;
+        color: #393939;
+        bottom: 10px;
+        left: 85px;
     }
-    .zc-line-3 {
-        height: 50px;
-        width: 100%;
-        border-bottom: 1px solid #eee;
-        position: relative;
-        .zc-butler-img {
-            position: absolute;
-            top: 5px;
-            left: 15px;
-            height: 40px;
-            width: 40px;
-            border-radius: 20px;
-            img {
-                height: 100%;
-                width: 100%;
-                border-radius: 50%;
-            }
-        }
-        .zc-butler-name {
-            position: absolute;
-            bottom: 15px;
-            left: 65px;
-            font-size: 16px;
-            color: #393939;
-        }
-        .zc-butler-tel {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            height: 20px;
-            width: 20px;
-            img {
-                height: 100%;
-                width: 100%;
-            }
-        }
+    .name {
+        position: absolute;
+        font-size: 12px;
+        color: #393939;
+        top: 10px;
+        left: 86px;
     }
-    .zc-line-4 {
-        position: relative;
-        height: 20px;
-        width: 100%;
-        .zc-count {
-            position: absolute;
-            right: 15px;
-            top: 4px;
-            font-size: 12px;
-            color: #393939;
-            span {
-                color: #EC5835;
-            }
-        }
+    .tel {
+        position: absolute;
+        right: 15px;
+        top: 0;
+        height: 80px;
+        line-height: 80px;
+        color: #3BA794;
     }
 }
 .no-data {

@@ -68,10 +68,6 @@
 
 </div>
 </div>
-<div class="status-3-btn" v-if="order.status === 3">
-  <div class="btn-left" v-tap="cancelOrder(true)"><img src="./change.png">更换工长</div>
-  <div class="btn-right">选择当前方案</div>
-</div>
 <!-- <x-button slot="right" style="border-radius:0;background-color:rgb(158, 188, 43);color:#fff;margin:20px 0;width:100%" v-if="order.status==7" onclick="location.href='order-judge.html'">去评价</x-button> -->
 <previewer :list="order.planList[0].images" v-ref:previewer :options="options"></previewer>
 <previewer v-if="order.planList[1]" :list="order.planList[1].images" v-ref:previewer :options="options"></previewer>
