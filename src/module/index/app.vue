@@ -16,6 +16,16 @@
 <script>
 import Lib from 'assets/Lib.js'
 import JFooter from 'components/JFooter.vue'
+import axios from 'axios'
+try{
+  axios.defaults.headers.common['x-user-token'] = JSON.parse(localStorage.getItem("user")).token
+}catch(e){
+  localStorage.clear()
+  window.location.href = `./wxAuth.html?url=index.html`
+}
+
+Vue.use(vueTap)
+
 export default {
     data() {
         return {
@@ -59,15 +69,16 @@ export default {
     ready() {
         let suc_count = 0
         this.index = (Lib.M.GetRequest().type - 1) || 0
-        this.$http.get(`${Lib.C.orderApi}decorationOrders`, {
+        axios.get(`${Lib.C.orderApi}decorationOrders`, {}, {
             params: {
                 filter: `projectManagerId:${JSON.parse(window.localStorage.getItem('user')).userId}|status:[1,7]`
-            }
+            },
+            responseType: 'json'
         }).then((res) => {
             res.data.data.map((e) => {
                 this.zxList.push(e)
             })
-        }, (res) => {
+        }).catch((res) => {
             alert("获取订单失败，请稍候再试QAQ")
         })
     },
