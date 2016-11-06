@@ -24,7 +24,6 @@ try{
   window.location.href = `./wxAuth.html?url=index.html`
 }
 
-Vue.use(vueTap)
 
 export default {
     data() {
