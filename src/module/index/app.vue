@@ -68,7 +68,7 @@ export default {
     ready() {
         let suc_count = 0
         this.index = (Lib.M.GetRequest().type - 1) || 0
-        axios.get(`${Lib.C.orderApi}decorationOrders`, {}, {
+        axios.get(`${Lib.C.orderApi}decorationOrders`, {
             params: {
                 filter: `projectManagerId:${JSON.parse(window.localStorage.getItem('user')).userId}|status:[1,7]`
             },
