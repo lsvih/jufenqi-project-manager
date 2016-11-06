@@ -30,7 +30,7 @@
 </group>
 <div class="select-plan" v-if="order.status==3">
   <div class="select-item-1" :class="{'active':selectPlan==0}" v-tap="selectPlan = 0">方案一</div>
-  <div class="select-item-2" v-if="order.planList[1]" :class="{'active':selectPlan==1}" v-tap="selectPlan = 1">方案二</div>
+  <div class="select-item-2" v-if="order.planList.length > 1" :class="{'active':selectPlan==1}" v-tap="selectPlan = 1">方案二</div>
 </div>
 
 <group title="设计方案" v-if="order.status>=3">
@@ -120,6 +120,7 @@ export default {
         status: 8,
         name: "订单已取消"
       }],
+      selectPlan:0,
       options: {
         getThumbBoundsFn(index) {
           let thumbnail = document.querySelectorAll('.product-img')[index]
