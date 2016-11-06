@@ -2,7 +2,6 @@
 <header>
   <img src="status.png">
   <div class="status">{{zxStatusList[order.status].name}}</div>
-  <div class="btn" v-if="order.status==1" v-tap="cancelOrder()">取消预约</div>
 
 </header>
 <div class="butler">
