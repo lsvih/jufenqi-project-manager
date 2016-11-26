@@ -1,14 +1,7 @@
 <template>
-<div class="content">
-    <div class="order" v-for="order in zxList" v-tap="viewDetail('zx',order.orderNo)">
-        <img :src="order.customerImage">
-        <div class="tel" onclick="location.href='tel:{{order.customerMobile}}'">{{order.customerMobile}}</div>
-        <div class="name">{{order.customerName}}</div>
-        <div class="status">{{zxStatusList[order.status].name}}</div>
-    </div>
-</div>
-<div v-if="zxList.length==0">
-    <div class="no-data"><img src="no-data.png"><span>暂无订单</span></div>
+  <no-data v-if="zxList.length==0"></no-data>
+<div class="content" v-else>
+  <j-order-block v-for="order in zxList" v-tap="viewDetail('zx',order.orderNo)" :img="order.customerImage" :name="order.customerName" :tel="order.customerMobile" :status="Status.zx[order.status].name"></j-order-block>
 </div>
 <j-footer></j-footer>
 </template>
@@ -17,6 +10,9 @@
 import Lib from 'assets/Lib.js'
 import JFooter from 'components/JFooter.vue'
 import axios from 'axios'
+import NoData from 'common/components/no-data'
+import JOrderBlock from 'common/components/j-order-block'
+import Status from 'common/status'
 try{
   axios.defaults.headers.common['x-user-token'] = JSON.parse(localStorage.getItem("user")).token
 }catch(e){
@@ -29,41 +25,16 @@ export default {
     data() {
         return {
             index: 0,
-            zxStatusList: [{
-                status: 0,
-                name: "订单已删除"
-            }, {
-                status: 1,
-                name: "已预约"
-            }, {
-                status: 2,
-                name: "已上门"
-            }, {
-                status: 3,
-                name: "待选方案"
-            }, {
-                status: 4,
-                name: "待支付"
-            }, {
-                status: 5,
-                name: "待施工"
-            }, {
-                status: 6,
-                name: "施工中"
-            }, {
-                status: 7,
-                name: "已完工"
-            }, {
-                status: 8,
-                name: "订单已取消"
-            }],
+            Status,
             zxList: [],
             zcList: [],
             tkList: []
         }
     },
     components: {
-        JFooter
+        JFooter,
+        NoData,
+        JOrderBlock
     },
     ready() {
         let suc_count = 0
@@ -121,65 +92,5 @@ header {
 .tab-active {
     color: #88C929 !important;
     border-color: #88C929 !important;
-}
-.order {
-    width: calc(~"100% - 15px");
-    height: 80px;
-    background-color: #fff;
-    padding-left: 15px;
-    position: relative;
-    border-bottom: 1px solid #eee;
-    img {
-        position: absolute;
-        top: 10px;
-        left: 15px;
-        width: 60px;
-        height: 60px;
-    }
-    .status {
-        position: absolute;
-        font-size: 12px;
-        color: #393939;
-        bottom: 10px;
-        left: 85px;
-    }
-    .name {
-        position: absolute;
-        font-size: 12px;
-        color: #393939;
-        top: 10px;
-        left: 86px;
-    }
-    .tel {
-        position: absolute;
-        right: 15px;
-        top: 0;
-        height: 80px;
-        line-height: 80px;
-        color: #3BA794;
-    }
-}
-.no-data {
-    position: relative;
-    width: 100%;
-    img {
-        position: absolute;
-        top: 220px;
-        left: calc( ~"50% - 35.5px" );
-        height: 71px;
-        width: 71px;
-    }
-    span {
-        display: block;
-        position: absolute;
-        width: 100%;
-        height: 16px;
-        font-size: 16px;
-        line-height: 16px;
-        left: 0;
-        top: 307px;
-        color: #DADADA;
-        text-align: center;
-    }
 }
 </style>
