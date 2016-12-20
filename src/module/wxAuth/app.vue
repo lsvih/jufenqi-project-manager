@@ -26,7 +26,8 @@ export default {
             if (this.code) {
                 axios.post(`${Lib.C.userApi}auth/loginUsingWechatQy`, {}, {
                     params: {
-                        code: this.code
+                        code: this.code,
+                        type: 4
                     },
                     withCredentials: true,
                     responseType: 'json'
