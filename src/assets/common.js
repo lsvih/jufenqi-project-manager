@@ -40,6 +40,13 @@ var Rxports = {
     window.localStorage.setItem(item, JSON.stringify(tempdata))
     cb()
   },
+  isAuth: () => {
+    if (window.localStorage.getItem('user')) {
+      return true
+    } else {
+      return false
+    }
+  },
   auth: (axios, requirePhone) => {
     try {
       let now = Number(new Date().getTime())
