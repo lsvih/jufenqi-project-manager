@@ -13,13 +13,7 @@ import axios from 'axios'
 import NoData from 'common/components/no-data'
 import JOrderBlock from 'common/components/j-order-block'
 import Status from 'common/status'
-try{
-  axios.defaults.headers.common['x-user-token'] = JSON.parse(localStorage.getItem("user")).token
-}catch(e){
-  localStorage.clear()
-  window.location.href = `./wxAuth.html?url=index.html`
-}
-
+Lib.M.auth(axios, true)
 
 export default {
     data() {
