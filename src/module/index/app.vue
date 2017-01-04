@@ -90,7 +90,7 @@ import {Tab, TabItem} from 'vux-components/tab'
 import Swiper from 'vux-components/swiper'
 import SwiperItem from 'vux-components/swiper-item'
 import Scroller from 'vux-components/scroller'
-Lib.M.auth(axios, true)
+Lib.M.auth(axios)
 
 export default {
     data() {
